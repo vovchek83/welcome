@@ -1,15 +1,19 @@
-import Button from './components/button'
+import { useQuery } from '@tanstack/react-query'
 import './App.css'
+import { getWeather } from './api';
+
 
 function App() {
+
+  const { data } = useQuery({
+    queryKey: ['weather'],
+    queryFn: () => getWeather({ lat: 37.7749, lon: 35 })
+  });
 
 
   return (
     <>
-      <div className='flex gap-4 p-4 flex-row'>
-        <Button >Login</Button>
-        <Button type='secondary'>Cancel</Button>
-        </div>
+      {JSON.stringify(data)}
     </>
   )
 }
